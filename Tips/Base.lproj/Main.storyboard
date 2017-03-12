@@ -7,7 +7,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Tip calculator-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Tips" customModuleProvider="target" sceneMemberID="viewController">
@@ -97,7 +97,13 @@
                             <outletCollection property="gestureRecognizers" destination="Nah-YG-Nx4" appends="YES" id="Fkh-eH-U45"/>
                         </connections>
                     </view>
-                    <navigationItem key="navigationItem" id="VIH-gG-Gs7"/>
+                    <navigationItem key="navigationItem" title="Tip calculator" id="VIH-gG-Gs7">
+                        <barButtonItem key="rightBarButtonItem" title="Settings" id="Q9l-mv-8xM">
+                            <connections>
+                                <segue destination="gc0-PS-qSe" kind="show" id="KkA-ho-QPS"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="billAmountTextField" destination="2vF-3I-sBx" id="YOW-KY-7SI"/>
                         <outlet property="customTipTextField" destination="xMt-Ul-jtx" id="rx2-PC-mXS"/>
@@ -114,6 +120,89 @@
                 </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1056.8" y="123.68815592203899"/>
+        </scene>
+        <!--Settings-->
+        <scene sceneID="HGe-rg-Quy">
+            <objects>
+                <viewController title="Settings" id="gc0-PS-qSe" customClass="SettingsViewController" customModule="Tips" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="7kR-Bo-FcN"/>
+                        <viewControllerLayoutGuide type="bottom" id="bqf-f1-jnM"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="PMs-M1-ZZl">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="F6A-gS-fte">
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Default tip percentage" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="boX-PX-5zC">
+                                        <fontDescription key="fontDescription" type="system" weight="thin" pointSize="30"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="yhR-wE-Nfa">
+                                        <subviews>
+                                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="HXM-l6-Ouc">
+                                                <segments>
+                                                    <segment title="15%"/>
+                                                    <segment title="20%"/>
+                                                    <segment title="25%"/>
+                                                    <segment title="Custom"/>
+                                                </segments>
+                                                <connections>
+                                                    <action selector="onDefaultTipValueChanged:" destination="gc0-PS-qSe" eventType="valueChanged" id="7Fe-J0-cZi"/>
+                                                </connections>
+                                            </segmentedControl>
+                                            <stackView opaque="NO" contentMode="scaleToFill" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="wFL-Kx-fDt">
+                                                <subviews>
+                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Tip" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Gul-dO-VtE">
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="60" id="nwV-cU-jW1"/>
+                                                        </constraints>
+                                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                        <fontDescription key="fontDescription" type="system" weight="ultraLight" pointSize="50"/>
+                                                        <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                                        <connections>
+                                                            <action selector="onCustomTipChanged:" destination="gc0-PS-qSe" eventType="editingChanged" id="CXy-YM-bJF"/>
+                                                        </connections>
+                                                    </textField>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="%" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s0G-Ni-AdO">
+                                                        <fontDescription key="fontDescription" type="system" weight="ultraLight" pointSize="40"/>
+                                                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstItem="s0G-Ni-AdO" firstAttribute="baseline" secondItem="Gul-dO-VtE" secondAttribute="baseline" id="d54-xw-N0o"/>
+                                                </constraints>
+                                            </stackView>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="HXM-l6-Ouc" firstAttribute="leading" secondItem="yhR-wE-Nfa" secondAttribute="leading" id="CYt-ek-PX8"/>
+                                            <constraint firstAttribute="trailing" secondItem="HXM-l6-Ouc" secondAttribute="trailing" id="RtX-8M-kCu"/>
+                                            <constraint firstItem="Gul-dO-VtE" firstAttribute="top" secondItem="HXM-l6-Ouc" secondAttribute="bottom" constant="15" id="qiN-a2-iHE"/>
+                                            <constraint firstItem="wFL-Kx-fDt" firstAttribute="centerX" secondItem="yhR-wE-Nfa" secondAttribute="centerX" id="vWo-lP-6fJ"/>
+                                        </constraints>
+                                    </stackView>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="F6A-gS-fte" firstAttribute="leading" secondItem="PMs-M1-ZZl" secondAttribute="leadingMargin" id="BjH-2E-jTV"/>
+                            <constraint firstItem="F6A-gS-fte" firstAttribute="top" secondItem="7kR-Bo-FcN" secondAttribute="bottom" constant="20" id="Z9M-SW-oK7"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="F6A-gS-fte" secondAttribute="trailing" id="y0Y-Cq-7IT"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="customTipStackView" destination="wFL-Kx-fDt" id="cik-C0-xQD"/>
+                        <outlet property="customTipTextField" destination="Gul-dO-VtE" id="aZR-Z6-Cxl"/>
+                        <outlet property="tipPercentageSegCtrl" destination="HXM-l6-Ouc" id="lm4-Uv-rXF"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FSx-CD-o68" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1980" y="124"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="E1A-NG-U5b">

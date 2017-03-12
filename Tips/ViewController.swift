@@ -18,11 +18,19 @@ class ViewController: UIViewController {
     
     var tipPercentage : Double = 15;
     
+    static let tipPercentages : [Int] = [15, 20, 25];
+
     override func viewDidLoad() {
         super.viewDidLoad();
         // Do any additional setup after loading the view, typically from a nib.
         
+        //tryInitializeDefaultTip()
         billAmountTextField.becomeFirstResponder();
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated);
+        tryInitializeDefaultTip();
     }
 
     override func didReceiveMemoryWarning() {
@@ -30,6 +38,30 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
+    func tryInitializeDefaultTip(){
+        let defaults = UserDefaults.standard;
+        let defaultTip = defaults.object(forKey: "defaultTip");
+        if (defaultTip != nil){
+            let tip = defaultTip as! Int;
+            var standard = false;
+            if (tip > 0){
+                for i in 0 ..< ViewController.tipPercentages.count {
+                    if (tip == ViewController.tipPercentages[i]){
+                        tipSegmentationControl.selectedSegmentIndex = i;
+                        standard = true;
+                        break;
+                    }
+                }
+                
+                if (!standard){
+                    tipSegmentationControl.selectedSegmentIndex = 3; // Custom
+                    customTipTextField.text = "\(tip)";
+                }
+                
+                onTipPercentageChanged(NSNull());
+            }
+        }
+    }
     @IBAction func onTipPercentageChanged(_ sender: AnyObject) {
         let isCustom = (tipSegmentationControl.selectedSegmentIndex == 3);
         if (isCustom){
@@ -60,8 +92,7 @@ class ViewController: UIViewController {
         if (isCustom){
             tipPercentage = Double(customTipTextField.text!) ?? 0;
         } else {
-            let tipPercentages = [15, 20, 25];
-            tipPercentage = Double(tipPercentages[tipSegmentationControl.selectedSegmentIndex]);
+            tipPercentage = Double(ViewController.tipPercentages[tipSegmentationControl.selectedSegmentIndex]);
         }
         updateTip();
     }
