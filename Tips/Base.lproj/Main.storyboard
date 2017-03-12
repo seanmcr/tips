@@ -28,6 +28,9 @@
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" weight="thin" pointSize="60"/>
                                         <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
+                                        <connections>
+                                            <action selector="onBillAmountEditingChanged:" destination="BYZ-38-t0r" eventType="editingChanged" id="cwF-hR-shz"/>
+                                        </connections>
                                     </textField>
                                     <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="dYo-D1-jtY">
                                         <segments>
@@ -36,14 +39,20 @@
                                             <segment title="25%"/>
                                             <segment title="Custom"/>
                                         </segments>
+                                        <connections>
+                                            <action selector="onTipPercentageChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="xNE-Io-rvw"/>
+                                        </connections>
                                     </segmentedControl>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Tip %" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xMt-Ul-jtx">
+                                    <textField hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Tip %" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xMt-Ul-jtx">
                                         <constraints>
                                             <constraint firstAttribute="height" constant="60" id="wkx-24-TF9"/>
                                         </constraints>
                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" type="system" weight="ultraLight" pointSize="50"/>
                                         <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                        <connections>
+                                            <action selector="onCustomTipPercentageEditingChanged:" destination="BYZ-38-t0r" eventType="editingChanged" id="XsC-5v-CEc"/>
+                                        </connections>
                                     </textField>
                                     <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1" translatesAutoresizingMaskIntoConstraints="NO" id="lDX-wi-s0L">
                                         <subviews>
@@ -61,14 +70,12 @@
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1" translatesAutoresizingMaskIntoConstraints="NO" id="mIz-XH-B6q">
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1" verticalHuggingPriority="251" ambiguous="YES" text="Total" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bKF-Pt-4uK">
-                                                <frame key="frameInset" width="243" height="48"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1" verticalHuggingPriority="251" text="Total" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bKF-Pt-4uK">
                                                 <fontDescription key="fontDescription" type="system" weight="ultraLight" pointSize="40"/>
                                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="2" verticalHuggingPriority="251" ambiguous="YES" text="$0.00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kaz-Nq-coL">
-                                                <frame key="frameInset" minX="243" width="101" height="48"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="2" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="$0.00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kaz-Nq-coL">
                                                 <fontDescription key="fontDescription" type="system" weight="ultraLight" pointSize="40"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -76,18 +83,35 @@
                                         </subviews>
                                     </stackView>
                                 </subviews>
+                                <gestureRecognizers/>
                             </stackView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstAttribute="trailingMargin" secondItem="ISl-3v-KbO" secondAttribute="trailing" id="CgX-5l-U8V"/>
                             <constraint firstItem="ISl-3v-KbO" firstAttribute="top" secondItem="B7f-mI-qUR" secondAttribute="bottom" constant="50" id="ZND-zd-iaW"/>
                             <constraint firstItem="ISl-3v-KbO" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="cvL-Xe-kQL"/>
                         </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="Nah-YG-Nx4" appends="YES" id="Fkh-eH-U45"/>
+                        </connections>
                     </view>
                     <navigationItem key="navigationItem" id="VIH-gG-Gs7"/>
+                    <connections>
+                        <outlet property="billAmountTextField" destination="2vF-3I-sBx" id="YOW-KY-7SI"/>
+                        <outlet property="customTipTextField" destination="xMt-Ul-jtx" id="rx2-PC-mXS"/>
+                        <outlet property="tipAmount" destination="si7-gt-Uha" id="gCZ-zq-7wb"/>
+                        <outlet property="tipSegmentationControl" destination="dYo-D1-jtY" id="sga-eT-FOe"/>
+                        <outlet property="totalAmount" destination="Kaz-Nq-coL" id="b8F-r3-o0G"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="Nah-YG-Nx4">
+                    <connections>
+                        <action selector="onViewTapped:" destination="BYZ-38-t0r" id="Odq-2F-NRA"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1056.8" y="123.68815592203899"/>
         </scene>
